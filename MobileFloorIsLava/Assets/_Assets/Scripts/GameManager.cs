@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public Transform SpawnPoint { get => spawnPoint; set => spawnPoint = value; }
 
     [SerializeField] private GameObject[] tiles;
     [SerializeField] private Transform spawnPoint;
@@ -45,11 +46,8 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < tiles.Length; i++)
         {
-            Instantiate(tiles[i], spawnPoint);
+            Instantiate(tiles[i], SpawnPoint);
             yield return new WaitForSeconds(3f);
         }
-        
-        
-
     }
 }

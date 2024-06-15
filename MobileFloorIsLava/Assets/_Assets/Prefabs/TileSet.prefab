@@ -36,7 +36,7 @@ Transform:
   - {fileID: 2435860691354084101}
   - {fileID: 777739640025004176}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5935410830105568137
 MonoBehaviour:
@@ -50,6 +50,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a96865f0679cd4da1c8c186e48e639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnMask:
+    serializedVersion: 2
+    m_Bits: 8
+  rayDistance: 20
 --- !u!1 &2209621107951192216
 GameObject:
   m_ObjectHideFlags: 0
