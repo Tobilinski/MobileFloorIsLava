@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -10,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject[] tiles;
     [SerializeField] private Transform spawnPoint;
+
+    private int Index;
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,29 +26,17 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
         StartCoroutine(Spawn());
-
-        //TileSpawn();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    void TileSpawn()
-    {
-        int Index = Random.Range(0, tiles.Length);
-
-
-    }
     IEnumerator Spawn()
     {
         for (int i = 0; i < tiles.Length; i++)
         {
-            Instantiate(tiles[i], SpawnPoint);
-            yield return new WaitForSeconds(3f);
+            int index = Random.Range(0, tiles.Length); // Generate a random index
+            Instantiate(tiles[index], SpawnPoint.position, Quaternion.identity); // Spawn at SpawnPoint position
+
+            yield return new WaitForSeconds(3f); // Wait for 3 seconds before spawning the next object
         }
     }
 }
