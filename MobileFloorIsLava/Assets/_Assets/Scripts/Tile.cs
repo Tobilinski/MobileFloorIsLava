@@ -26,7 +26,7 @@ public class Tile : MonoBehaviour
             if (hit.collider.gameObject.CompareTag("Trigger"))
             {
                 // Perform your respawn action here
-                this.transform.position = GameManager.Instance.SpawnPoint.position;
+                this.transform.position = GameManager.Instance.RespawnPoint.position;
                 Debug.Log("Hit");
             }
         }

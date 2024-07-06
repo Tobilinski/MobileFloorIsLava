@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour
     {
         UpdateMoveInput();
         UpdateFMove();
-       
-
     }
     void UpdateMoveInput()
     {
@@ -39,12 +37,14 @@ public class PlayerController : MonoBehaviour
             if(touch.phase == TouchPhase.Began)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                GameManager.Instance.SpawnPlate.SetActive(false);
             }
         }
     }
-    void UpdateFMove()
+    void UpdateFMove()  
     {
        
         rb.velocity = new Vector2(dirX, rb.velocity.y);
     }
+    
 }
