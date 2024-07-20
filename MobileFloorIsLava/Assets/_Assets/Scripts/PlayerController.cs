@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public interface IPlatformBehavior
+{
+    public void OnjumpDestroy();
+}
+
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
@@ -23,10 +28,10 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        UpdateMoveInput();
-        UpdateFMove();
+        FixedUpdateMoveInput();
+        FixedUpdateFMove();
     }
-    void UpdateMoveInput()
+    void FixedUpdateMoveInput()
     {
         dirX = Input.acceleration.x * movementSpeed;
         transform.position = new Vector2 (Mathf.Clamp(transform.position.x,-7.5f, 7.5f), transform.position.y);
@@ -37,14 +42,20 @@ public class PlayerController : MonoBehaviour
             if(touch.phase == TouchPhase.Began)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                GameManager.Instance.SpawnPlate.SetActive(false);
             }
         }
     }
-    void UpdateFMove()  
+    void FixedUpdateFMove()  
     {
-       
         rb.velocity = new Vector2(dirX, rb.velocity.y);
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        IPlatformBehavior interactable = other.gameObject.GetComponent<IPlatformBehavior>();
+        if (interactable != null)
+        {
+            interactable.OnjumpDestroy();
+        }
+    }
 }

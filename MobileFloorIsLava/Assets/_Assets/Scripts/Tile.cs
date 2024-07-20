@@ -1,34 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+public class Tile : MonoBehaviour, IPlatformBehavior
 {
-    float speed = 1f;
-    [SerializeField] private LayerMask respawnMask;
-
-    private float rayDistance = 1f;
-    // Update is called once per frame
-    void Update()
+    public void OnjumpDestroy()
     {
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
-        Detect();
-        Debug.DrawRay(transform.position, -Vector2.up * rayDistance, Color.green);
-        //Debug.DrawLine(this.transform.position, this.transform.position + this.transform.up);
+        StartCoroutine(DelayedDestroyer());
     }
 
-    void Detect()
+    public IEnumerator DelayedDestroyer()
     {
-        // Perform a 2D raycast
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, rayDistance, respawnMask);
-
-        // Check if the raycast hit something
-        if (hit.collider != null)
-        {
-            if (hit.collider.gameObject.CompareTag("Trigger"))
-            {
-                // Perform your respawn action here
-                this.transform.position = GameManager.Instance.RespawnPoint.position;
-                Debug.Log("Hit");
-            }
-        }
+        yield return new WaitForSeconds(1f);
+        Destroy(this.gameObject);
     }
+    
 }
