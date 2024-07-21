@@ -17017,6 +17017,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120233413}
     m_Modifications:
+    - target: {fileID: 2367177080099895546, guid: ff09a7b21958b514fa0315f46c69165b, type: 3}
+      propertyPath: prefabPlatParticle
+      value: 
+      objectReference: {fileID: 6748427945771766865, guid: 68ba1c3cb05811149a25135f504ecf2e, type: 3}
+    - target: {fileID: 2367177080099895546, guid: ff09a7b21958b514fa0315f46c69165b, type: 3}
+      propertyPath: prefabPlatNoParticle
+      value: 
+      objectReference: {fileID: 6748427945771766865, guid: cfe7f481d55d079498ed2fb8fe73714d, type: 3}
     - target: {fileID: 3153594529041407961, guid: ff09a7b21958b514fa0315f46c69165b, type: 3}
       propertyPath: m_Name
       value: GameManager

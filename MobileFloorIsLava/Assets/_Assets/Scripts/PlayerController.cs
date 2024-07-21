@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public interface IPlatformBehavior
-{
-    public void OnjumpDestroy();
-}
-
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
@@ -56,6 +51,7 @@ public class PlayerController : MonoBehaviour
         if (interactable != null)
         {
             interactable.OnjumpDestroy();
+            interactable.KillOverlap();
         }
     }
 }

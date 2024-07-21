@@ -13,5 +13,17 @@ public class Tile : MonoBehaviour, IPlatformBehavior
         yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
     }
-    
+
+    public void KillOverlap()
+    {
+        Destroy(this.gameObject);
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        IPlatformBehavior interactable = other.gameObject.GetComponent<IPlatformBehavior>();
+        if (interactable != null)
+        {
+            interactable.KillOverlap();
+        }
+    }
 }

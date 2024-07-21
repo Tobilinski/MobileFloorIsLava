@@ -6,13 +6,14 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    
+
 
    
-    
-    [SerializeField] private GameObject prefabPlat;
 
-    private int platformCount = 300;
+    [SerializeField] private GameObject prefabPlatParticle;
+    [SerializeField] private GameObject prefabPlatNoParticle;
+
+    private int platformCount = 150;
 
     
     // Start is called before the first frame update
@@ -30,12 +31,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Vector3 spawnPosition = new Vector3();
+
+       
+        Vector3 spawnPositionPart = new Vector3();
         for (int i = 0; i < platformCount; i++)
         {
-            spawnPosition.y += Random.Range(.5f, 1f);
-            spawnPosition.x = Random.Range(-2.5f, 2.5f);
-            Instantiate(prefabPlat, spawnPosition, Quaternion.identity);
+            spawnPositionPart.y += Random.Range(.5f, 1f);
+            spawnPositionPart.x = Random.Range(-2.5f, 2.5f);
+            Instantiate(prefabPlatParticle, spawnPositionPart, Quaternion.identity);
+        }
+        Vector3 spawnPositionNoPart = new Vector3();
+        for (int i = 0; i < platformCount; i++)
+        {
+            spawnPositionNoPart.y += 1;
+            spawnPositionNoPart.x = Random.Range(-2f, 2f);
+            Instantiate(prefabPlatNoParticle, spawnPositionNoPart, Quaternion.identity);
         }
     }
 
