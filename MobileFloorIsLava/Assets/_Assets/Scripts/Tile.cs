@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour, IPlatformBehavior
 
     public IEnumerator DelayedDestroyer()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
     }
     
