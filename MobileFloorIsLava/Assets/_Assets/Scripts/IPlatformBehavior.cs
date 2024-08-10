@@ -1,6 +1,5 @@
 public interface IPlatformBehavior
 {
-    void OnjumpDestroy();
-
+    void OnjumpDestroyAndAddScore();
     void KillOverlap();
 }

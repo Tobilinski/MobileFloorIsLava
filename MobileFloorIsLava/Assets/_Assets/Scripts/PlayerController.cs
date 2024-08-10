@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     float dirX;
     float movementSpeed = 20f;
     float jumpForce = 5f;
+    [SerializeField] private Platform platform;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -50,8 +52,28 @@ public class PlayerController : MonoBehaviour
         IPlatformBehavior interactable = other.gameObject.GetComponent<IPlatformBehavior>();
         if (interactable != null)
         {
-            interactable.OnjumpDestroy();
-            interactable.KillOverlap();
+            GameObject obj = other.gameObject;
+            platform = new Platform(obj);
+            
+            interactable.OnjumpDestroyAndAddScore();
+           
+            //interactable.KillOverlap();
         }
+        
     }
+}
+[System.Serializable]
+public class Platform
+{
+    [SerializeField] private GameObject platformGameObject;
+    [SerializeField] private SpriteRenderer platformSprite;
+
+    public Platform(GameObject platformGameObject)
+    {
+        this.PlatformGameObject = platformGameObject;
+        this.platformSprite = platformGameObject.GetComponent<SpriteRenderer>();
+    }
+
+    public GameObject PlatformGameObject { get => platformGameObject; set => platformGameObject = value; }
+    public SpriteRenderer PlatformSprite { get => platformSprite; set => platformSprite = value; }
 }

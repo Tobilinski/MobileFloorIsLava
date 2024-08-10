@@ -7,14 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-
-   
-
     [SerializeField] private GameObject prefabPlatParticle;
     [SerializeField] private GameObject prefabPlatNoParticle;
-
+    
     private int platformCount = 150;
-
     
     // Start is called before the first frame update
     void Awake()
@@ -51,4 +47,5 @@ public class GameManager : MonoBehaviour
 
     
 }
+
 

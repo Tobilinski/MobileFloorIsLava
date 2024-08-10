@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour, IPlatformBehavior
 {
-    public void OnjumpDestroy()
+    public void OnjumpDestroyAndAddScore()
     {
         StartCoroutine(DelayedDestroyer());
     }
@@ -11,6 +11,7 @@ public class Tile : MonoBehaviour, IPlatformBehavior
     public IEnumerator DelayedDestroyer()
     {
         yield return new WaitForSeconds(2f);
+        AddScore();
         Destroy(this.gameObject);
     }
 
@@ -18,12 +19,17 @@ public class Tile : MonoBehaviour, IPlatformBehavior
     {
         Destroy(this.gameObject);
     }
-    private void OnTriggerStay2D(Collider2D other)
+
+    public void AddScore()
     {
-        IPlatformBehavior interactable = other.gameObject.GetComponent<IPlatformBehavior>();
-        if (interactable != null)
-        {
-            interactable.KillOverlap();
-        }
+        UserManager.Instance.AddScoreToData();
     }
+    //private void OnTriggerStay2D(Collider2D other)
+    //{
+    //    IPlatformBehavior interactable = other.gameObject.GetComponent<IPlatformBehavior>();
+    //    if (interactable != null)
+    //    {
+    //        interactable.KillOverlap();
+    //    }
+    //}
 }
