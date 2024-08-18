@@ -42,8 +42,6 @@ public class PlayerController : MonoBehaviour
             if(touch.phase == TouchPhase.Began)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-
-                SoundManager.PlaySound("Jump");
             }
         }
     }
