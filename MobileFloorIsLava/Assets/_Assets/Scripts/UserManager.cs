@@ -4,8 +4,9 @@ using UnityEngine;
 public class UserManager : MonoBehaviour
 {
     public static UserManager Instance;
-    [SerializeField] private SaveableStats stats = new SaveableStats();
+    [SerializeField] public SaveableStats stats = new SaveableStats();
     [SerializeField] private string filePath;
+    private int score;
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -21,15 +22,24 @@ public class UserManager : MonoBehaviour
     public void Start()
     {
         LoadData();
+       
     }
     public void OnApplicationQuit()
     {
         SaveToJson();
     }
+    public int Score()
+    {
+        return score;
+    }
 
 
     public void SaveToJson()
     {
+        if (score > stats.HighScore)
+        {
+            stats.HighScore = score;
+        }
         string data = JsonUtility.ToJson(stats);
         File.WriteAllText(filePath, data);
         print("Saving data");
@@ -52,7 +62,7 @@ public class UserManager : MonoBehaviour
     public void AddScoreToData()
     {
         stats.GoldCoins += 1;
-        stats.PlatsformsReached += 1;
+        score += 1;
     }
 }
 
@@ -60,8 +70,9 @@ public class UserManager : MonoBehaviour
 public class SaveableStats
 {
     [SerializeField] private int goldCoins;
-    [SerializeField] private int platsformsReached;
+    [SerializeField] private int highScore;
 
     public int GoldCoins { get => goldCoins; set => goldCoins = value; }
-    public int PlatsformsReached { get => platsformsReached; set => platsformsReached = value; }
+    public int HighScore { get => highScore; set => highScore = value; }
 }
+

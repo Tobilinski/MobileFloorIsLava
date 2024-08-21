@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,7 +10,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject prefabPlatParticle;
     [SerializeField] private GameObject prefabPlatNoParticle;
-    
+
+    [SerializeField] private TextMeshPro scoreUI;
+    [SerializeField] private TextMeshPro highScoreUI;
+
+
     private int platformCount = 150;
     
     // Start is called before the first frame update
@@ -27,8 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
-       
+        highScoreUI.text = $"High Score: {UserManager.Instance.stats.HighScore}";
         Vector3 spawnPositionPart = new Vector3();
         for (int i = 0; i < platformCount; i++)
         {
@@ -45,7 +49,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    private void Update()
+    {
+        scoreUI.text = $"Score: {UserManager.Instance.Score()}";
+    }
 }
 
 
