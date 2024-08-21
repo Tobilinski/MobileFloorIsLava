@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Platform platform;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private bool groundCheck = false;
+    private int jumpCounter;
     [SerializeField] private LayerMask platformLayer;
 
     // Start is called before the first frame update
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began && groundCheck)
             {
+                jumpCounter++;
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
         }
@@ -49,8 +51,9 @@ public class PlayerController : MonoBehaviour
         {
             groundCheck = true;
         }
-        else
+        else if(jumpCounter == 2) 
         {
+            jumpCounter = 0;
             groundCheck = false;
         }
     }
