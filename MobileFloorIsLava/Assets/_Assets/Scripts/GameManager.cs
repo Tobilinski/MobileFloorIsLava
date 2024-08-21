@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshPro scoreUI;
     [SerializeField] private TextMeshPro highScoreUI;
+    [SerializeField] private TextMeshPro pathUI;
 
 
     private int platformCount = 150;
@@ -32,7 +33,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        highScoreUI.text = $"High Score: {UserManager.Instance.stats.HighScore}";
+
+        StartCoroutine(Delayer());
         Vector3 spawnPositionPart = new Vector3();
         for (int i = 0; i < platformCount; i++)
         {
@@ -47,6 +49,12 @@ public class GameManager : MonoBehaviour
             spawnPositionNoPart.x = Random.Range(-2f, 2f);
             Instantiate(prefabPlatNoParticle, spawnPositionNoPart, Quaternion.identity);
         }
+    }
+    public IEnumerator Delayer()
+    {
+        yield return new WaitForSeconds(0.6f);
+        pathUI.text = $"{UserManager.Instance.FilePath}";
+        highScoreUI.text = $"High Score: {UserManager.Instance.stats.HighScore}";
     }
 
     private void Update()

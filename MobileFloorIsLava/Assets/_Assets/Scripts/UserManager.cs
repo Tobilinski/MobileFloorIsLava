@@ -1,3 +1,4 @@
+using System.Collections;
 using System.IO;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ public class UserManager : MonoBehaviour
     [SerializeField] public SaveableStats stats = new SaveableStats();
     [SerializeField] private string filePath;
     private int score;
+
+    public string FilePath { get => filePath; set => filePath = value; }
+
     public void Awake()
     {
         if (Instance != null && Instance != this)
@@ -17,11 +21,11 @@ public class UserManager : MonoBehaviour
         {
             Instance = this;
         }
-        filePath = Application.persistentDataPath + "/userData.json";
+        FilePath = Application.persistentDataPath + "/userData.json";
     }
     public void Start()
     {
-        LoadData();
+        StartCoroutine(Delayer());
        
     }
     public void OnApplicationQuit()
@@ -41,28 +45,24 @@ public class UserManager : MonoBehaviour
             stats.HighScore = score;
         }
         string data = JsonUtility.ToJson(stats);
-        File.WriteAllText(filePath, data);
+        File.WriteAllText(FilePath, data);
         print("Saving data");
     }
     public void LoadData()
     {
-        if (File.Exists(filePath))
-        {
-            string data = File.ReadAllText(filePath);
-            stats = JsonUtility.FromJson<SaveableStats>(data);
-        }
-        else
-        {
-            string data = JsonUtility.ToJson(stats);
-            File.WriteAllText(filePath, data);
-            print("File Created ready for load");
-        }
+        string data = File.ReadAllText(FilePath);
+        stats = JsonUtility.FromJson<SaveableStats>(data);
     }
 
     public void AddScoreToData()
     {
         stats.GoldCoins += 1;
         score += 1;
+    }
+    public IEnumerator Delayer()
+    {
+        yield return new WaitForSeconds(0.5f);
+        LoadData();
     }
 }
 
