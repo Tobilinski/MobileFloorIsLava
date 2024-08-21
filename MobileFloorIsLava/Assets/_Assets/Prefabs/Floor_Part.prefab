@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 3065749086502079037}
   - component: {fileID: 5382138604939612645}
   - component: {fileID: 8117021307145752041}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor_Part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4860,7 +4860,7 @@ Transform:
   m_GameObject: {fileID: 6748427945771766865}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.78, y: -0.83, z: 0}
-  m_LocalScale: {x: 0.56, y: 0.17, z: 1}
+  m_LocalScale: {x: 1, y: 0.17, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3817428848585110185}
@@ -4945,7 +4945,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 33044
+  m_InstanceId: 55796
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}

@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject prefabPlatParticle;
     [SerializeField] private GameObject prefabPlatNoParticle;
 
-    [SerializeField] private TextMeshPro scoreUI;
-    [SerializeField] private TextMeshPro highScoreUI;
+    [SerializeField] private TextMeshProUGUI scoreUI;
+    [SerializeField] private TextMeshProUGUI highScoreUI;
     [SerializeField] private TextMeshPro pathUI;
 
 
@@ -39,14 +39,14 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < platformCount; i++)
         {
             spawnPositionPart.y += Random.Range(.5f, 1f);
-            spawnPositionPart.x = Random.Range(-2.5f, 2.5f);
+            spawnPositionPart.x = Random.Range(-3.5f, 3.5f);
             Instantiate(prefabPlatParticle, spawnPositionPart, Quaternion.identity);
         }
         Vector3 spawnPositionNoPart = new Vector3();
         for (int i = 0; i < platformCount; i++)
         {
             spawnPositionNoPart.y += 1;
-            spawnPositionNoPart.x = Random.Range(-2f, 2f);
+            spawnPositionNoPart.x = Random.Range(-4f, 4f);
             Instantiate(prefabPlatNoParticle, spawnPositionNoPart, Quaternion.identity);
         }
     }
