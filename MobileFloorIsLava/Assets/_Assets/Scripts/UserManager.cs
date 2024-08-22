@@ -23,15 +23,12 @@ public class UserManager : MonoBehaviour
         }
         FilePath = Application.persistentDataPath + "/userData.json";
     }
+    
     public void Start()
     {
         StartCoroutine(Delayer());
-       
     }
-    public void OnApplicationQuit()
-    {
-        SaveToJson();
-    }
+    
     public int Score()
     {
         return score;
@@ -58,6 +55,7 @@ public class UserManager : MonoBehaviour
     {
         stats.GoldCoins += 1;
         score += 1;
+        SaveToJson();
     }
     public IEnumerator Delayer()
     {
