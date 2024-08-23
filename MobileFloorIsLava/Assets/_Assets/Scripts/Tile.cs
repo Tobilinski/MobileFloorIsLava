@@ -1,8 +1,16 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Tile : MonoBehaviour, IPlatformBehavior
 {
+    private Vector3 newPos;
+
+    [SerializeField] private Vector3 gameManagerPlatformPos;
+    private void Start()
+    {
+        StartCoroutine(Delayer());  
+    }
     public void OnjumpDestroyAndAddScore()
     {
         StartCoroutine(DelayedDestroyer());
@@ -12,6 +20,14 @@ public class Tile : MonoBehaviour, IPlatformBehavior
     {
         yield return new WaitForSeconds(2f);
         AddScore();
+
+        newPos.y = Random.Range(.5f, 1f);
+        newPos.x = Random.Range(-3.5f, 3.5f);
+        //gameManagerPlatformPos.y += newPos.y;
+        //gameManagerPlatformPos.x = newPos.x;
+        //transform.position = gameManagerPlatformPos;
+
+
         Destroy(this.gameObject);
     }
 
@@ -24,12 +40,10 @@ public class Tile : MonoBehaviour, IPlatformBehavior
     {
         UserManager.Instance.AddScoreToData();
     }
-    //private void OnTriggerStay2D(Collider2D other)
-    //{
-    //    IPlatformBehavior interactable = other.gameObject.GetComponent<IPlatformBehavior>();
-    //    if (interactable != null)
-    //    {
-    //        interactable.KillOverlap();
-    //    }
-    //}
+    public IEnumerator Delayer()
+    {
+        yield return new WaitForSeconds(0.6f);
+        gameManagerPlatformPos = GameManager.Instance.SpawnPositionPart;
+
+    }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 
+
 public class UserManager : MonoBehaviour
 {
     public static UserManager Instance;
@@ -22,6 +23,7 @@ public class UserManager : MonoBehaviour
             Instance = this;
         }
         FilePath = Application.persistentDataPath + "/userData.json";
+       
     }
     
     public void Start()
@@ -43,12 +45,13 @@ public class UserManager : MonoBehaviour
         }
         string data = JsonUtility.ToJson(stats);
         File.WriteAllText(FilePath, data);
-        print("Saving data");
+        Debug.Log("Saving data");
     }
     public void LoadData()
     {
         string data = File.ReadAllText(FilePath);
         stats = JsonUtility.FromJson<SaveableStats>(data);
+        Debug.Log("Data Loaded");
     }
 
     public void AddScoreToData()

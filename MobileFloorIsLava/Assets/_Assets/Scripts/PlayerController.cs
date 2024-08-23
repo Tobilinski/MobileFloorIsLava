@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         {
             groundCheck = true;
         }
-        else if(jumpCounter == 2) 
+        else if(jumpCounter >= 2) 
         {
             jumpCounter = 0;
             groundCheck = false;
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         {
             GameObject obj = other.gameObject;
             platform = new Platform(obj);
-
+            
             interactable.OnjumpDestroyAndAddScore();
 
             //interactable.KillOverlap();
