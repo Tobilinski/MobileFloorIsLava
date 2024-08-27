@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        resetEvent = GameObject.Find("Reset").GetComponent<ColliderEventTrigger>();
+        resetEvent = GameObject.Find("$$Reset$$").GetComponent<ColliderEventTrigger>();
         resetEvent.OnEnter.AddListener(ResetGame);
         resetEvent.gameObject.SetActive(false);
         StartCoroutine(Delayer());
