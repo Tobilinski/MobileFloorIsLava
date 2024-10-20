@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
             if (touch.phase == TouchPhase.Began && groundCheck)
             {
                 jumpCounter++;
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             }
         }
     }
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdateFMove()
     {
-        rb.velocity = new Vector2(dirX, rb.velocity.y);
+        rb.linearVelocity = new Vector2(dirX, rb.linearVelocity.y);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
