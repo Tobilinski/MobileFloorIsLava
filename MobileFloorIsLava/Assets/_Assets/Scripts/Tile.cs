@@ -1,15 +1,15 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
+using Random = UnityEngine.Random;
 
 public class Tile : MonoBehaviour, IPlatformBehavior
 {
-    private Vector3 newPos;
-
-    [SerializeField] private Vector3 gameManagerPlatformPos;
+    private GameManager gameManager;
+    private Vector3 positionPart;
     private void Start()
     {
-        StartCoroutine(Delayer());  
+        gameManager = GameManager.Instance;
     }
     public void OnjumpDestroyAndAddScore()
     {
@@ -20,15 +20,10 @@ public class Tile : MonoBehaviour, IPlatformBehavior
     {
         yield return new WaitForSeconds(2f);
         AddScore();
-
-        newPos.y = Random.Range(.5f, 1f);
-        newPos.x = Random.Range(-3.5f, 3.5f);
-        //gameManagerPlatformPos.y += newPos.y;
-        //gameManagerPlatformPos.x = newPos.x;
-        //transform.position = gameManagerPlatformPos;
-
-
-        Destroy(this.gameObject);
+        positionPart.y += Random.Range(.5f, 1f);
+        positionPart.x = Random.Range(-3.5f, 3.5f);
+        transform.position = positionPart += gameManager.HighestPlatformPos;
+        //Destroy(this.gameObject);
     }
 
     public void KillOverlap()
@@ -39,11 +34,5 @@ public class Tile : MonoBehaviour, IPlatformBehavior
     public void AddScore()
     {
         UserManager.Instance.AddScoreToData();
-    }
-    public IEnumerator Delayer()
-    {
-        yield return new WaitForSeconds(0.6f);
-        gameManagerPlatformPos = GameManager.Instance.SpawnPositionPart;
-
     }
 }

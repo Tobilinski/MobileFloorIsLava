@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,20 +11,23 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
-    public Vector3 SpawnPositionPart { get => spawnPositionPart; set => spawnPositionPart = value; }
+    public List<GameObject> Platforms { get => platforms; set => platforms = value; }
+    public Vector3 HighestPlatformPos { get => highestPlatformPos; set => highestPlatformPos = value; }
 
-    [SerializeField] private GameObject prefabPlatParticle;
-    [SerializeField] private GameObject prefabPlatNoParticle;
+    [SerializeField] private GameObject[] prefabPlat;
+    
 
     [SerializeField] private TextMeshProUGUI scoreUI;
     [SerializeField] private TextMeshProUGUI highScoreUI;
     [SerializeField] private TextMeshPro pathUI;
-    [SerializeField] private Vector3 spawnPositionPart = new Vector3();
-    [SerializeField] private Vector3 spawnPositionNoPart = new Vector3();
+    private Vector3 spawnPositionPart = new Vector3();
+    private Vector3 spawnPositionNoPart = new Vector3();
+    [SerializeField] private Vector3 highestPlatformPos;
 
     [SerializeField] private GameObject platformParent;
     [SerializeField] private int platformCount;
-    [SerializeField] private ColliderEventTrigger resetEvent;
+    private ColliderEventTrigger resetEvent;
+    [SerializeField]  private List<GameObject> platforms;
     
     // Start is called before the first frame update
     void Awake()
@@ -46,7 +50,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Delayer());
         
         SpawnPlatforms();
-        Debug.Log("Objects Placed");
+        
+        //Debug.Log("Objects Placed");
     }
     private void SpawnPlatforms()
     {
@@ -54,18 +59,16 @@ public class GameManager : MonoBehaviour
         {
             spawnPositionPart.y += Random.Range(.5f, 1f);
             spawnPositionPart.x = Random.Range(-3.5f, 3.5f);
-            GameObject obj = Instantiate(prefabPlatParticle, spawnPositionPart, Quaternion.identity);
-            obj.transform.SetParent(platformParent.transform);
-        }
 
-        for (int i = 0; i < platformCount; i++)
-        {
-            spawnPositionNoPart.y += 1;
-            spawnPositionNoPart.x = Random.Range(-4f, 4f);
-            GameObject obj = Instantiate(prefabPlatNoParticle, spawnPositionNoPart, Quaternion.identity);
-            obj.transform.SetParent(platformParent.transform);
+            GameObject obj = prefabPlat[Random.Range(0, prefabPlat.Length)];
+            GameObject newObj = Instantiate(obj, spawnPositionPart, Quaternion.identity);
+            newObj.transform.SetParent(platformParent.transform);
+            Platforms.Add(obj);
+            
         }
+        highestPlatformPos = Platforms[platforms.Count -1].transform.position;
     }
+    
     public void ResetGame(GameObject gameOb)
     {
         SceneManager.LoadScene("Game");

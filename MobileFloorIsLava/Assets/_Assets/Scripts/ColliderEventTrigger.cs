@@ -23,7 +23,4 @@ public class ColliderEventTrigger : MonoBehaviour
             OnExit?.Invoke(other.gameObject);
         }
     }
-
-
-
 }

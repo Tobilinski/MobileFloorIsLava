@@ -60,7 +60,6 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-
         Gizmos.DrawWireSphere(transform.position, groundCheckRadius);
     }
     void FixedUpdateFMove()
@@ -77,8 +76,6 @@ public class PlayerController : MonoBehaviour
             platform = new Platform(obj);
             
             interactable.OnjumpDestroyAndAddScore();
-
-            //interactable.KillOverlap();
         }
     }
 }
