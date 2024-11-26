@@ -63,8 +63,7 @@ public class GameManager : MonoBehaviour
             GameObject obj = prefabPlat[Random.Range(0, prefabPlat.Length)];
             GameObject newObj = Instantiate(obj, spawnPositionPart, Quaternion.identity);
             newObj.transform.SetParent(platformParent.transform);
-            Platforms.Add(obj);
-            
+            Platforms.Add(newObj);
         }
         highestPlatformPos = Platforms[platforms.Count -1].transform.position;
     }
