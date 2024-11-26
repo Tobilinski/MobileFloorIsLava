@@ -5,34 +5,38 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+using Sirenix.OdinInspector;
 
 [System.Serializable]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
+    [Title("Platforms", "Platforms prefabs used to spawn in", TitleAlignments.Centered)]
+    [SerializeField]  private List<GameObject> platforms;
     public List<GameObject> Platforms { get => platforms; set => platforms = value; }
     public Vector3 HighestPlatformPos { get => highestPlatformPos; set => highestPlatformPos = value; }
 
     [SerializeField] private GameObject[] prefabPlat;
     
-
+    
     [SerializeField] private TextMeshProUGUI scoreUI;
     [SerializeField] private TextMeshProUGUI highScoreUI;
     [SerializeField] private TextMeshPro pathUI;
     private Vector3 spawnPositionPart = new Vector3();
     private Vector3 spawnPositionNoPart = new Vector3();
+    [ReadOnly]
     [SerializeField] private Vector3 highestPlatformPos;
 
     [SerializeField] private GameObject platformParent;
     [SerializeField] private int platformCount;
     private ColliderEventTrigger resetEvent;
-    [SerializeField]  private List<GameObject> platforms;
+   
     
     // Start is called before the first frame update
     void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance is not null)
         {
             Destroy(this);
         }

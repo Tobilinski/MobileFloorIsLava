@@ -1,12 +1,13 @@
 using System.Collections;
 using System.IO;
 using UnityEngine;
-
+using Sirenix.OdinInspector;
 
 public class UserManager : MonoBehaviour
 {
     public static UserManager Instance;
     [SerializeField] public SaveableStats stats = new SaveableStats();
+    [TextArea(4, 10)]
     [SerializeField] private string filePath;
     private int score;
 
