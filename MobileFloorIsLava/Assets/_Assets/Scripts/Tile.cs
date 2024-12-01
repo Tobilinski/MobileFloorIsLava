@@ -20,7 +20,7 @@ public class Tile : MonoBehaviour, IPlatformBehavior
     {
         yield return new WaitForSeconds(2f);
         AddScore();
-        
+        Destroy(gameObject);
     }
 
     public void KillOverlap()
