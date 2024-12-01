@@ -24,6 +24,7 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-39e3afa6e9e852d41aa0f5bdba827f56-1544269-0
         - globalObjectIdString: GlobalObjectId_V1-2-39e3afa6e9e852d41aa0f5bdba827f56-1955202470-0
         - globalObjectIdString: GlobalObjectId_V1-2-39e3afa6e9e852d41aa0f5bdba827f56-3153594529041407961-1013511505
+        - globalObjectIdString: GlobalObjectId_V1-2-39e3afa6e9e852d41aa0f5bdba827f56-1278700242-0
         values:
         - colorIndex: 9
           iconNameOrGuid: ScriptableObject Icon
@@ -36,4 +37,6 @@ MonoBehaviour:
         - colorIndex: 5
           iconNameOrGuid: Terrain Icon
         - colorIndex: 9
+          iconNameOrGuid: 
+        - colorIndex: 6
           iconNameOrGuid: 
