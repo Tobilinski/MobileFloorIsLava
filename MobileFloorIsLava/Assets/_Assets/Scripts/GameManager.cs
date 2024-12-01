@@ -12,10 +12,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
-    [Title("Platforms", "Platforms prefabs used to spawn in", TitleAlignments.Centered)]
-    [SerializeField]  private List<GameObject> platforms;
-    public List<GameObject> Platforms { get => platforms; set => platforms = value; }
-    public Vector3 HighestPlatformPos { get => highestPlatformPos; set => highestPlatformPos = value; }
+    [Title("Platforms", "Types of platforms to spawn", TitleAlignments.Centered)]
 
     [SerializeField] private GameObject[] prefabPlat;
     [SerializeField] private TextMeshProUGUI scoreUI;
@@ -23,10 +20,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshPro pathUI;
     private GameObject newPlatform;
     
-    [ReadOnly]
-    [SerializeField] private Vector3 highestPlatformPos;
-
-    [SerializeField] private GameObject platformParent;
     [SerializeField] private int platformCount;
     private ColliderEventTrigger resetTrigger;
     private ColliderEventTrigger gameManagerTrigger;
@@ -48,22 +41,23 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        resetTrigger = GameObject.Find("$$Reset$$").GetComponent<ColliderEventTrigger>();
-        gameManagerTrigger = GetComponent<ColliderEventTrigger>();
-        resetTrigger.OnEnter.AddListener(ResetGame);
-        resetTrigger.gameObject.SetActive(false);
-        StartCoroutine(Delayer());
-        gameManagerTrigger.OnTriggerEnterPlatform.AddListener((gameObject) => SpawnPlatforms(gameObject));
-        
-        
-        //Debug.Log("Objects Placed");
+        Init();
     }
     private void SpawnPlatforms(GameObject triggeringObject)
     {
         newPlatform = Instantiate(prefabPlat[Random.Range(0, prefabPlat.Length)], new Vector2(Random.Range(-2.5f, 2.5f), 
                                     player.transform.position.y + (1 + Random.Range(1f,1.5f))),Quaternion.identity);
-        newPlatform.transform.parent = platformParent.transform;
         Destroy(triggeringObject);
+    }
+
+    private void Init()
+    {
+        resetTrigger = GameObject.Find("$$Reset$$").GetComponent<ColliderEventTrigger>();
+        gameManagerTrigger = GetComponent<ColliderEventTrigger>();
+        resetTrigger.OnEnter.AddListener(ResetGame);
+        resetTrigger.gameObject.SetActive(false);
+        StartCoroutine(Delayer());
+        gameManagerTrigger.OnTriggerEnterPlatform.AddListener((gameObject) => SpawnPlatforms(gameObject)); 
     }
     
     public void ResetGame(GameObject gameOb)
