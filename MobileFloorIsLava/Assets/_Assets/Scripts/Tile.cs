@@ -20,10 +20,7 @@ public class Tile : MonoBehaviour, IPlatformBehavior
     {
         yield return new WaitForSeconds(2f);
         AddScore();
-        positionPart.y += Random.Range(.5f, 1f);
-        positionPart.x = Random.Range(-3.5f, 3.5f);
-        transform.position = positionPart += gameManager.HighestPlatformPos;
-        //Destroy(this.gameObject);
+        
     }
 
     public void KillOverlap()

@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3153594529041407961}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.14499998, y: 8.475, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.125, y: 3.125, z: 3.125}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2367177080099895546
 MonoBehaviour:
@@ -45,8 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c409b70578fdb40b62b91d3f0cbec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPlatParticle: {fileID: 6748427945771766865, guid: 68ba1c3cb05811149a25135f504ecf2e, type: 3}
-  prefabPlatNoParticle: {fileID: 6748427945771766865, guid: cfe7f481d55d079498ed2fb8fe73714d, type: 3}
+  platforms: []
+  prefabPlat:
+  - {fileID: 6748427945771766865, guid: cfe7f481d55d079498ed2fb8fe73714d, type: 3}
+  - {fileID: 6748427945771766865, guid: 68ba1c3cb05811149a25135f504ecf2e, type: 3}
+  scoreUI: {fileID: 0}
+  highScoreUI: {fileID: 0}
+  pathUI: {fileID: 0}
+  highestPlatformPos: {x: 0, y: 0, z: 0}
+  platformParent: {fileID: 0}
+  platformCount: 100
+  player: {fileID: 0}
 --- !u!114 &5781436544602805961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,4 +70,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     goldCoins: 0
-    platsformsReached: 0
+    highScore: 0
+  filePath: 

@@ -23,9 +23,10 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-39e3afa6e9e852d41aa0f5bdba827f56-1099144102-0
         - globalObjectIdString: GlobalObjectId_V1-2-39e3afa6e9e852d41aa0f5bdba827f56-1544269-0
         - globalObjectIdString: GlobalObjectId_V1-2-39e3afa6e9e852d41aa0f5bdba827f56-1955202470-0
+        - globalObjectIdString: GlobalObjectId_V1-2-39e3afa6e9e852d41aa0f5bdba827f56-3153594529041407961-1013511505
         values:
         - colorIndex: 9
-          iconNameOrGuid: 
+          iconNameOrGuid: ScriptableObject Icon
         - colorIndex: 7
           iconNameOrGuid: 
         - colorIndex: 4
@@ -34,3 +35,5 @@ MonoBehaviour:
           iconNameOrGuid: StandaloneInputModule Icon
         - colorIndex: 5
           iconNameOrGuid: Terrain Icon
+        - colorIndex: 9
+          iconNameOrGuid: 

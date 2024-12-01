@@ -18,19 +18,19 @@ public class GameManager : MonoBehaviour
     public Vector3 HighestPlatformPos { get => highestPlatformPos; set => highestPlatformPos = value; }
 
     [SerializeField] private GameObject[] prefabPlat;
-    
-    
     [SerializeField] private TextMeshProUGUI scoreUI;
     [SerializeField] private TextMeshProUGUI highScoreUI;
     [SerializeField] private TextMeshPro pathUI;
-    private Vector3 spawnPositionPart = new Vector3();
-    private Vector3 spawnPositionNoPart = new Vector3();
+    private GameObject newPlatform;
+    
     [ReadOnly]
     [SerializeField] private Vector3 highestPlatformPos;
 
     [SerializeField] private GameObject platformParent;
     [SerializeField] private int platformCount;
-    private ColliderEventTrigger resetEvent;
+    private ColliderEventTrigger resetTrigger;
+    private ColliderEventTrigger gameManagerTrigger;
+    [SerializeField] private PlayerController player;
    
     
     // Start is called before the first frame update
@@ -48,28 +48,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        resetEvent = GameObject.Find("$$Reset$$").GetComponent<ColliderEventTrigger>();
-        resetEvent.OnEnter.AddListener(ResetGame);
-        resetEvent.gameObject.SetActive(false);
+        resetTrigger = GameObject.Find("$$Reset$$").GetComponent<ColliderEventTrigger>();
+        gameManagerTrigger = GetComponent<ColliderEventTrigger>();
+        resetTrigger.OnEnter.AddListener(ResetGame);
+        resetTrigger.gameObject.SetActive(false);
         StartCoroutine(Delayer());
+        gameManagerTrigger.OnTriggerEnterPlatform.AddListener((gameObject) => SpawnPlatforms(gameObject));
         
-        SpawnPlatforms();
         
         //Debug.Log("Objects Placed");
     }
-    private void SpawnPlatforms()
+    private void SpawnPlatforms(GameObject triggeringObject)
     {
-        for (int i = 0; i < platformCount; i++)
-        {
-            spawnPositionPart.y += Random.Range(.5f, 1f);
-            spawnPositionPart.x = Random.Range(-3.5f, 3.5f);
-
-            GameObject obj = prefabPlat[Random.Range(0, prefabPlat.Length)];
-            GameObject newObj = Instantiate(obj, spawnPositionPart, Quaternion.identity);
-            newObj.transform.SetParent(platformParent.transform);
-            Platforms.Add(newObj);
-        }
-        highestPlatformPos = Platforms[platforms.Count -1].transform.position;
+        newPlatform = Instantiate(prefabPlat[Random.Range(0, prefabPlat.Length)], new Vector2(Random.Range(-2.5f, 2.5f), 
+                                    player.transform.position.y + (1 + Random.Range(1f,1.5f))),Quaternion.identity);
+        Destroy(triggeringObject);
     }
     
     public void ResetGame(GameObject gameOb)
