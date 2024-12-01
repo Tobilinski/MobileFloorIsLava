@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     {
         newPlatform = Instantiate(prefabPlat[Random.Range(0, prefabPlat.Length)], new Vector2(Random.Range(-2.5f, 2.5f), 
                                     player.transform.position.y + (1 + Random.Range(1f,1.5f))),Quaternion.identity);
+        newPlatform.transform.parent = platformParent.transform;
         Destroy(triggeringObject);
     }
     

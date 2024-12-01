@@ -11,7 +11,7 @@ public class ColliderEventTrigger : MonoBehaviour
     public UnityEvent<GameObject> OnExit;
     public UnityEvent<GameObject> OnTriggerEnter;
     public UnityEvent<GameObject> OnTriggerExit;
-    [HideIf("isOnGameManger")]
+    [ShowIf("isOnGameManger")]
     public UnityEvent<GameObject> OnTriggerEnterPlatform;
 
     private void OnCollisionEnter2D(Collision2D other)
